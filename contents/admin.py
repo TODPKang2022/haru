@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from contents.models import Content, Image, FollowRelation
+from contents.models import Content, Image, FollowRelation, Question
 
 
 class ImageInline(admin.TabularInline):
@@ -13,6 +13,12 @@ class ContentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Content, ContentAdmin)
+
+class QuestionAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Question, QuestionAdmin)
+
 
 
 class ImageAdmin(admin.ModelAdmin):

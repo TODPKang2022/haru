@@ -53,6 +53,7 @@ $(document).ready(function(){
 
 
   var followeesIds = {{ followees_ids }};
+
   $('#search').click(function () {
      var username = $('#searchUserName').val();
      $.get("{% url 'apis_v1_user_get' %}", {username: username}, function(obj) {

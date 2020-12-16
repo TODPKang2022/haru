@@ -3,7 +3,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
 
-from contents.models import Content, FollowRelation
+from contents.models import Content, FollowRelation, Question
 
 
 @method_decorator(login_required, name='dispatch')
@@ -15,6 +15,7 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
 
         user = self.request.user
+        context['questions'] = Question.objects.order_by('text').first()
         followees = FollowRelation.objects.filter(follower=user).values_list('followee__id', flat=True)
         lookup_user_ids = [user.id] + list(followees)
         context['contents'] = Content.objects.select_related('user').prefetch_related('image_set').filter(
@@ -41,7 +42,8 @@ class RelationView(TemplateView):
             context['followees_ids'] = list(followers.values_list('id', flat=True))
             
         except FollowRelation.DoesNotExist:
-            pass
+            context['followees_ids'] = [0]
+            # pass
 
         context['followers'] = FollowRelation.objects.select_related('follower').filter(followee__in=[user])
         

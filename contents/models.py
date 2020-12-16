@@ -13,6 +13,14 @@ class BaseModel(models.Model):
         abstract = True
 
 
+class Question(BaseModel):
+
+    text = models.TextField(default='')
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name_plural = "질문"
+
 class Content(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(default='')
