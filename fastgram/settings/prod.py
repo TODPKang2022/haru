@@ -9,4 +9,6 @@ DATABASES = {
     }
 }
 
+STATICFILES_DIRS = []
+
 DEBUG = False
