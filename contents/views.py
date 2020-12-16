@@ -15,7 +15,7 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
 
         user = self.request.user
-        context['questions'] = Question.objects.order_by('text').first()
+        context['questions'] = Question.objects.order_by('text').last()
         followees = FollowRelation.objects.filter(follower=user).values_list('followee__id', flat=True)
         lookup_user_ids = [user.id] + list(followees)
         context['contents'] = Content.objects.select_related('user').prefetch_related('image_set').filter(
