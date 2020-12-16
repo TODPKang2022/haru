@@ -23,8 +23,8 @@ from django.conf.urls.static import static
 from contents.views import HomeView, RelationView
 
 
-admin.site.site_header = "Fastgram Admin"
-admin.site.site_title = "Fastgram Admin Site"
+admin.site.site_header = "Todp Admin"
+admin.site.site_title = "Todp Admin Site"
 admin.site.index_title = "Hello everyone:)"
 
 class NonUserTemplateView(TemplateView):
